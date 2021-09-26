@@ -1,18 +1,27 @@
 import React from 'react';
+import { MoodOptionType, MoodOptionWithTimestamp } from './types';
 
 type AppContextType = {
-  greeting: string;
+  moodList: MoodOptionWithTimestamp[];
+  handleSelectMood: (mood: MoodOptionType) => void;
 };
 
 const defaultValue = {
-  greeting: '',
+  moodList: [],
+  handleSelectMood: () => {},
 };
 
 const AppContext = React.createContext<AppContextType>(defaultValue);
 
 export const AppProvider: React.FC = ({ children }) => {
+  const [moodList, setMoodList] = React.useState<MoodOptionWithTimestamp[]>([]);
+
+  const handleSelectMood = React.useCallback((mood: MoodOptionType) => {
+    setMoodList(current => [...current, { mood, timestamp: Date.now() }]);
+  }, []);
+
   return (
-    <AppContext.Provider value={{ greeting: 'Hello' }}>
+    <AppContext.Provider value={{ moodList, handleSelectMood }}>
       {children}
     </AppContext.Provider>
   );
