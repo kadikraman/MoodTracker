@@ -1,10 +1,9 @@
 import React from 'react';
-import { Text } from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Home } from './Home.screen';
 import { History } from './History.screen';
 import { Analytics } from './Analytics.screen';
-import { HomeIcon } from '../components/Icons';
+import { AnalyticsIcon, HistoryIcon, HomeIcon } from '../components/Icons';
 import { theme } from '../theme';
 
 const BottomTabs = createBottomTabNavigator();
@@ -22,11 +21,11 @@ export const BottomTabsNavigator: React.FC = () => {
           }
 
           if (route.name === 'History') {
-            return <Text>History</Text>;
+            return <HistoryIcon color={color} size={size} />;
           }
 
           if (route.name === 'Analytics') {
-            return <Text>Analytics</Text>;
+            return <AnalyticsIcon color={color} size={size} />;
           }
 
           return null;
